@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1074200862070",
+    "project_id": "edubuddy-fb465",
+    "storage_bucket": "edubuddy-fb465.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074200862070:android:ff518c21cc87c5f5c12e57",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074200862070-p3kv9lp1e62tc0qvbaoasl42jdpi5b87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPYKbJl9eHWgMhKRmQ9jnZi5yHENcEtPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074200862070-p3kv9lp1e62tc0qvbaoasl42jdpi5b87.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
