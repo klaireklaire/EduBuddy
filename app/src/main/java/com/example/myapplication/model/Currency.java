@@ -1,6 +1,8 @@
 package com.example.myapplication.model;
 
-public enum Currency {
+import java.io.Serializable;
+
+public enum Currency implements Serializable {
     USD,
     VND
 }

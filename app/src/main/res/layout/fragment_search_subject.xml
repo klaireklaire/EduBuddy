@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/theme_background"
     tools:context=".view.SearchSubjectFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -48,9 +49,11 @@
 
     <Button
         android:id="@+id/findTutor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Find Tutor"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="328dp"
+        android:layout_height="54dp"
+        android:text="Search"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

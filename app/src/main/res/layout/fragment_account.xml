@@ -5,10 +5,12 @@
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/theme_background"
     tools:context=".view.AccountFragment">
 
     <TextView
         android:id="@+id/teachingSubjectsLabel"
+        android:freezesText="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -21,6 +23,7 @@
 
     <TextView
         android:id="@+id/learningSubjectsLabel"
+        android:freezesText="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -35,11 +38,11 @@
         android:id="@+id/editProfileButton"
         style="@style/Widget.Material3.Button"
         android:layout_width="328dp"
-        android:layout_height="wrap_content"
+        android:layout_height="54dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:text="EDIT PROFILE"
+        android:text="Edit profile"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -58,16 +61,15 @@
 
     <TextView
         android:id="@+id/nameLabel"
+        android:freezesText="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@font/abril_fatface"
         android:text="Jane Doe"
+        android:textColor="@color/theme_purple_500"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/rateLabel"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editProfileButton"
         app:layout_constraintTop_toBottomOf="@+id/avatarView" />
 
     <TextView
@@ -94,6 +96,7 @@
 
     <TextView
         android:id="@+id/teachingSubjectsText"
+        android:freezesText="true"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -106,6 +109,7 @@
 
     <TextView
         android:id="@+id/learningSubjectsText"
+        android:freezesText="true"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -149,6 +153,7 @@
 
     <TextView
         android:id="@+id/zipCodeDisplayText"
+        android:freezesText="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
@@ -161,6 +166,7 @@
 
     <TextView
         android:id="@+id/remoteDisplayText"
+        android:freezesText="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
@@ -173,6 +179,7 @@
 
     <TextView
         android:id="@+id/numStudentsDisplayText"
+        android:freezesText="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"

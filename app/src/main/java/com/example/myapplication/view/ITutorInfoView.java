@@ -2,6 +2,7 @@ package com.example.myapplication.view;
 
 import com.example.myapplication.model.Currency;
 import com.example.myapplication.model.User;
+import com.example.myapplication.model.Subject;
 /**
  * An interface displaying tutor's editing required profile information
  *
@@ -16,8 +17,9 @@ public interface ITutorInfoView {
          * @param currency
          * @param zipCode
          * @param isRemote
+         * @param teachingSubject
          */
-        void onAddedTutorInfo(double ratePerHour, int numStudents, Currency currency, int zipCode, boolean isRemote);
+        void onAddedTutorInfo(double ratePerHour, int numStudents, Currency currency, int zipCode, boolean isRemote, Subject teachingSubject);
     }
 
 }

@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/theme_background"
     tools:context=".view.AccountFragment">
 
     <EditText
@@ -105,9 +106,9 @@
         android:id="@+id/finishEditButton"
         style="@style/Widget.Material3.Button"
         android:layout_width="328dp"
-        android:layout_height="wrap_content"
+        android:layout_height="54dp"
         android:layout_marginTop="26dp"
-        android:text="FINISH EDIT"
+        android:text="Finish edit"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"

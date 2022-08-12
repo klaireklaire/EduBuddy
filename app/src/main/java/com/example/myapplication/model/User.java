@@ -1,5 +1,10 @@
 package com.example.myapplication.model;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -10,7 +15,7 @@ import java.util.*;
  * @version 2022.04.04
  */
 
-public class User {
+public class User implements Serializable {
 
     // fields
     /**
@@ -33,10 +38,7 @@ public class User {
      */
     int birthYear;
 
-    /**
-     * The user's gender: Male, Female, and Other
-     */
-    Gender gender;
+
 
     /**
      * True if the user can engage with the tutoring process remotely. False otherwise.
@@ -64,13 +66,22 @@ public class User {
     // String awards;
     // List<EduHistory> eduList;
 
-
     /** Default constructor
      *
      */
     public User(){
 
     }
+
+    // references strings for database access
+    private static final String EMAIL = "email";
+    private static final String PASSWORD = "password";
+    private static final String NAME = "name";
+    private static final String BIRTH_YEAR = "birthYear";
+    private static final String IS_REMOTE = "isRemote";
+    private static final String ZIP_CODE = "zipCode";
+    private static final String TEACHING_LIST = "teachingList";
+    private static final String LEARNING_LIST = "learningList";
 
     /**
      * Constructor for an on-set User object
@@ -81,7 +92,6 @@ public class User {
         this.password = "";
         this.name = name;
         this.birthYear = 0;
-        this.gender = Gender.OTHER;
         this.isRemote = false;
         this.zipCode = 10000;
         this.teachingList = new HashSet<Subject>();
@@ -90,28 +100,91 @@ public class User {
 
     /**
      * Constructor for a User object
-     * @param email
-     * @param password
-     * @param name
-     * @param birthYear
-     * @param gender
-     * @param isRemote
-     * @param zipCode
-     * @param teachingList
-     * @param learningList
+     * @param email User's email
+     * @param password User's password
+     * @param name User's full name
+     * @param birthYear User's birth year
+     * @param isRemote User's availability of teaching remotely
+     * @param zipCode User's zip code
+     * @param teachingList User's list of teaching subjects
+     * @param learningList User's list of learning subjects
      */
-    public User(String email, String password, String name, int birthYear, Gender gender, boolean isRemote,
+    public User(String email, String password, String name, int birthYear, boolean isRemote,
                 int zipCode, Set<Subject> teachingList, Set<Subject> learningList) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.birthYear = birthYear;
-        this.gender = gender;
         this.isRemote = isRemote;
         this.zipCode = zipCode;
         this.teachingList = teachingList;
         this.learningList = learningList;
     }
+
+    @NonNull
+    public Map<String,Object> toMap() {
+        Map<String,Object> map = new HashMap<>();
+        map.put(EMAIL, email);
+        map.put(PASSWORD, password);
+        map.put(NAME, name);
+        map.put(BIRTH_YEAR, birthYear);
+        map.put(IS_REMOTE, isRemote);
+        map.put(ZIP_CODE, zipCode);
+
+        List<Map<String, Object>> tlArray = new LinkedList<>();
+        int i = 0;
+        for (Subject s : this.teachingList) tlArray.add(s.toMap());
+
+        List<Map<String, Object>> llArray = new LinkedList<>();
+        int j = 0;
+        for (Subject s : this.learningList) llArray.add(s.toMap());
+
+        map.put(TEACHING_LIST, tlArray);
+        map.put(LEARNING_LIST, llArray);
+
+        return map;
+    }
+
+    public static User fromMap(@NonNull Map<String, Object> map) {
+        String email = (String) map.get(EMAIL);
+        String password = (String) map.get(PASSWORD);
+        String name = (String) map.get(NAME);
+        long birthYear = (long) map.get(BIRTH_YEAR);
+        int birthYearInt = Math.toIntExact(birthYear);
+        boolean isRemote = (boolean) map.get(IS_REMOTE);
+        long zipCode = (long) map.get(ZIP_CODE);
+        int zipCodeInt = Math.toIntExact(zipCode);
+        Set<Subject> teachingList = new HashSet<>();
+        Set<Subject> learningList = new HashSet<>();
+
+//        Map<String,Object>[] tlArray = (Map<String,Object>[]) map.get(TEACHING_LIST);
+        ArrayList<Map<String, Object>> tlArray = (ArrayList<Map<String, Object>>) map.get(TEACHING_LIST);
+        for (Map<String, Object> s : tlArray)
+            teachingList.add(Subject.fromMap(s));
+
+        ArrayList<Map<String, Object>> llArray = (ArrayList<Map<String, Object>>) map.get(LEARNING_LIST);
+        for (Map<String, Object> s : llArray)
+            learningList.add(Subject.fromMap(s));
+
+        return new User(email, password, name, birthYearInt, isRemote, zipCodeInt, teachingList, learningList);
+    }
+
+//    public List<Subject> toList(Set<Subject> set) {
+//        List<Subject> retlist = new ArrayList<>(set);
+//        for (Subject s : set) {
+//            retlist.add(s);
+//        }
+//
+//        return retlist;
+//    }
+//
+//    public static Set<Subject> toSet(Object list) {
+//        Set<Subject> retset = new HashSet<>();
+//        if (list instanceof ArrayList)  {
+//            retset = new HashSet<Subject>((List<Subject>) list);
+//        }
+//        return retset;
+//    }
 
     @Override
     public String toString() {
@@ -120,7 +193,6 @@ public class User {
 
         result += "Name: " + this.name;
         result += "\nBirth year: " + this.birthYear;
-        result += "\nGender: " + this.gender;
 
         result += "\nRemote tutoring available: ";
         if (this.isRemote) {
@@ -218,13 +290,6 @@ public class User {
         this.birthYear = birthYear;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
 
     public boolean isRemote() {
         return isRemote;

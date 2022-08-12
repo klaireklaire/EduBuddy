@@ -10,13 +10,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentPickModeBinding;
 import com.example.myapplication.databinding.FragmentTutorInfoBinding;
 import com.example.myapplication.model.Currency;
+import com.example.myapplication.model.Subject;
+import com.example.myapplication.model.SubjectLevel;
 import com.example.myapplication.model.User;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -30,6 +35,8 @@ public class TutorInfoFragment extends Fragment {
     private FragmentTutorInfoBinding binding;
     private ITutorInfoView.Listener listener;
     boolean isRemote;
+    String subject;
+    SubjectLevel subjectLevel;
 
     public TutorInfoFragment(ITutorInfoView.Listener listener) {
         this.listener = listener;
@@ -49,6 +56,60 @@ public class TutorInfoFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        Spinner spinner = binding.spinner;
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.subjects, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                TutorInfoFragment.this.subject = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(adapterView.getContext(), subject, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Snackbar.make(view, "Please select a subject name.",
+                        Snackbar.LENGTH_LONG).show();
+
+            }
+        });
+
+        Spinner spinnerLevel = binding.spinner2;
+        ArrayAdapter<CharSequence> adapterLevel = ArrayAdapter.createFromResource(this.getContext(), R.array.levels, android.R.layout.simple_spinner_item);
+        adapterLevel.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinnerLevel.setAdapter(adapterLevel);
+        spinnerLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String level = adapterView.getItemAtPosition(i).toString();
+                Log.i("EduBuddy", level);
+
+                if (level.equals("Elementary")){
+                    TutorInfoFragment.this.subjectLevel = SubjectLevel.PRIMARY;
+                } else if (level.equals("Middle School")) {
+                    TutorInfoFragment.this.subjectLevel = SubjectLevel.MIDDLE_SCHOOL;
+                } else if (level.equals("High School")) {
+                    TutorInfoFragment.this.subjectLevel = SubjectLevel.HIGH_SCHOOL;
+                } else {
+                    TutorInfoFragment.this.subjectLevel = SubjectLevel.COLLEGE;
+                }
+
+                Toast.makeText(adapterView.getContext(), level, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Snackbar.make(view, "Please select a subject level.",
+                        Snackbar.LENGTH_LONG).show();
+
+            }
+
+
+        });
+
 
         this.binding.nextButton3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +171,9 @@ public class TutorInfoFragment extends Fragment {
                 // get isRemote
                 boolean isRemote = TutorInfoFragment.this.binding.remoteCheckBox.isChecked();
 
+                // get subject
+                Subject teachingSubject = new Subject(subject, subjectLevel);
+
                 // confirm we have all fields
                 if (rateStr.length() == 0 || numStudentsStr.length() == 0 ||
                         currencyStr.length() == 0 || numZipcodeStr.length() == 0) {
@@ -126,13 +190,17 @@ public class TutorInfoFragment extends Fragment {
                     return;
                 }
 
+
+
+
+
 //                numStudentsText.clear();
 //                rateText.clear();
 //                currencyText.clear();
 //                numZipcode.clear();
 
                 // Convert User to TutorUser and add new fields
-                TutorInfoFragment.this.listener.onAddedTutorInfo(ratePerHour, numStudents, currency, zipCode, isRemote);
+                TutorInfoFragment.this.listener.onAddedTutorInfo(ratePerHour, numStudents, currency, zipCode, isRemote, teachingSubject);
             }
         });
 

@@ -3,6 +3,7 @@ package com.example.myapplication.view;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -100,6 +101,8 @@ public class SearchSubjectFragment extends Fragment implements ISearchSubjectVie
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
+
+
         });
 
         // user click on studentButton
@@ -112,6 +115,23 @@ public class SearchSubjectFragment extends Fragment implements ISearchSubjectVie
 
             }
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putString("SUBJECT", subject);
+        outState.putSerializable("SUBJECT_LEVEL", subjectLevel);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle saveInstanceState){
+        super.onViewStateRestored(saveInstanceState);
+        if (saveInstanceState != null) {
+            this.subject = saveInstanceState.getString("SUBJECT");
+            this.subjectLevel = (SubjectLevel) saveInstanceState.getSerializable("SUBJECT_LEVEL");
+        }
+
     }
 //    @Override
 //    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

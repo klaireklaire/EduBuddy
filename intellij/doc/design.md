@@ -106,26 +106,66 @@ hide footbox
 !theme mimeograph
 skinparam backgroundColor lavenderBlush
 
-title Sequence diagram: Create and edit new user
+title Sequence diagram: Register account and edit new user
 
 actor User as user
 participant " : UI" as ui 
 participant " : Controller " as control
 participant " user : User " as ul
+participant " db : Database " as db
 
 user -> ui : Enter necessary fields
 ui -> control : Create new User object with inputs
 control -> ul : Create new User object with inputs
+ul -> db : New User user's document is created
 ul --> control : New User object is created 
 control --> ui : Return new User() object 
 ui --> user : Display AccountFragment 
 user -> ui : Edit account 
 ui -> user : Ask for new inputs 
 ui -> control : Update User object with inputs
-control -> ul : Update User object with inputs
+control -> ul : Update User object
+ul -> db : Update User's user document 
 ul --> control : Updated User object is created 
 control --> ui : Return updated User() object 
 ui --> user : Display AccountFragment 
+
+@enduml
+```
+
+```plantuml
+@startuml
+hide footbox
+!theme mimeograph
+skinparam backgroundColor lavenderBlush
+
+title Sequence diagram: Creating a tutor booking request
+
+actor Tutor as tutor
+actor User as user
+participant " : UI" as ui 
+participant " : Controller " as control
+participant " rq : Request " as rq
+participant " u : User " as u
+participant " t : Tutor " as t
+participant " db : Database " as db
+
+user -> ui : Click on "Book" button to request
+ui -> user : Ask for information on the request
+user --> ui : Enter needed inputs
+ui -> control : Create new Request object
+control -> rq : Create new Request object
+rq -> u : Update RequestList under User object
+u -> db : Update fields in User's user document
+u --> control : Return updated User object 
+control --> ui : Return updated User object
+ui --> user : Display AccountFragment
+rq -> t : Decrement numStudents under User object
+rq -> t : Update RequestList under Tutor object
+t -> db : Update fields in Tutor's user document
+t --> control : Return updated Tutor object
+control --> ui : Return updated Tutor object 
+ui --> tutor : Display AccountFragment 
 
 @enduml
 ```
@@ -300,6 +340,15 @@ class SearchSubjectFragment {
           + onCreateView()
           + onViewCreated()
       }
+      
+class SendRequestFragment {
+          + SendRequestFragment()
+          + onCreate()
+          + onCreateView()
+          + buildDialog() 
+          + addCard()
+          + onViewCreated()
+      }   
 
 SetupActivity .up.|> IAccountView.Listener
 SetupActivity .up.|> IAddBirthdayView.Listener
@@ -310,6 +359,7 @@ SetupActivity .up.|> IFilteredTutorsView.Listener
 SetupActivity .up.|> IPickModeView.Listener
 SetupActivity .up.|> ISearchSubjectView.Listener
 SetupActivity .up.|> ITutorInfoView.Listener
+SetupActivity .up.|> ISendRequestView.Listener
 SetupActivity o-- TutorUser : tutorUser
 SetupActivity o-- UserLibrary : ul
 SetupActivity o-- User : user
@@ -322,6 +372,7 @@ IFilteredTutorsView <|.up. FilteredTutorsFragment
 IPickModeView <|.up. PickModeFragment
 ISearchSubjectView <|.up. SearchSubjectFragment
 ITutorInfoView <|.up. TutorInfoFragment
+ISendRequestView <|.up. SendRequestFragment
 
 class UserLibrary {
     Set<User> [1..*] 

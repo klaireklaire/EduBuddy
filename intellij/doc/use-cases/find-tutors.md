@@ -23,7 +23,7 @@ a. Subjects: pick subjects from the list \
 b. Location: choose from 3 options (online/tutor to student/student to tutor)            
 c. Study goals  \
 d. Preferred gender\
-e. Availability time range \
+e. Availability time range 
 3. Clients are able to see the full list of potential tutors that match their needs \
 4. System presents tutors’ profile including tutors’ name, gender, availability (hour), expertise, ratings, price, location
 5. Clients can hit the “save” button while scrolling the profile to go back later if they want to connect with the tutors

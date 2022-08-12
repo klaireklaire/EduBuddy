@@ -1,33 +1,41 @@
 ## Fully Dressed Use-Cases (6)
 
-### Booking 
+### Request a booking / Accept a booking
 **Scope**: EduBuddy application \
-**Level**: Sub-function \
-**Primary Actor**: Client \
+**Level**: Function \
+**Primary Actor**: Client, Tutor \
 **Stakeholders and interests:**
-* Tutor: want to be notified when students request to have lesson with them, be able to schedule lesson with students
-* Students: want to get notification when a tutor agrees to teach, be able to schedule lesson with tutors 
-* Parents: same wants as students
+* Clients: Want to book a tutor and send their availability to the tutor;
+Want to receive notification about the decision of the tutor on the booking
+* Tutors: Want to receive notification with information on the booking request
 
 
-**Preconditions**: students or tutors have already initialized the matching process by click on "request" button. tutor accepts 
-the request 
+**Preconditions**: Students have already initialized the matching process by clicking on the "Request" button. 
 
-**Postconditions**:
-* Tutor and student successfully schedule meetings base on how often and how long they want to meet
+**Postconditions**: Tutor and student successfully schedule meetings base on how often and how long they want to meet
 
 **Main success scenario:**
-1. Clients go to the “Booking” screen
-2. Clients start booking process based on tutors availability: \
-   a. Frequency 
-   b. Days in a week           
-   c. Hour
-3. Clients confirm their selection \
-4. System informs tutor about student's booking
-5. Tutor review booking and accept/request change/reject booking 
-6. Tutors and students are successfully matched
+1. Clients go to the tutor's Profile page
+2. Clients start the booking process by clicking on the "Book" button on the tutor's Profile page. 
+3. The system prompts a Booking Request Creation pop-up for the client to enter their booking info
+4. Clients confirm their request
+5. System informs the tutor about the client's booking
+6. Tutor reviews booking and accepts the booking
+7. Tutor and student are successfully matched
+8. Student's information is moved to the "Students" section under the tutor's Profile page
+9. Tutor's information is moved to the "Tutors" section under the student's Profile page
+10. The booking request is deleted from the "Request" section under the tutor's and the student's Profile page
 
-*a At any time, system crashes
-* User restarts system
-* User contacts system support
-* System reconstructs prior state
+* Extensions:
+    * a At any time, system crashes:
+        * User restarts app
+        * App reconstructs prior state
+    * 2a Tutor's number of students already exceeded their stated capacity 
+      * System displays warning: "Are you sure? This tutor is over capacity. This request will go into their waitlist."
+      * Client can choose either Yes or No. If Yes, the booking process proceeds as normal. If No, the process terminates. 
+    * 2b User already booked the tutor (i.e., previous booking process is not finished)
+      * System displays warning: "Are you sure? Your previous booking has not been resolved yet."
+      * Client can choose either Yes or No. If Yes, the booking process proceeds as normal. If No, the process terminates.
+    * 5a Tutor reviews the booking and declines the booking 
+      * System prompts tutor to pick the reason for the decline 
+      * System informs the student of the tutor's decline and their reason

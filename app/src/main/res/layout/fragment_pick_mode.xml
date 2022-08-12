@@ -5,7 +5,8 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.PickModeFragment" >
+    android:background="@color/theme_background"
+    tools:context=".view.PickModeFragment">
 
     <TextView
         android:id="@+id/cueLabel5"
@@ -28,7 +29,7 @@
         android:layout_width="328dp"
         android:layout_height="170dp"
         android:layout_marginTop="33dp"
-        android:text="I'LL LEARN"
+        android:text="I'll learn"
         android:textSize="16sp"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +42,7 @@
         android:layout_width="328dp"
         android:layout_height="170dp"
         android:layout_marginTop="19dp"
-        android:text="I'LL TUTOR"
+        android:text="I'll tutor"
         android:textSize="16sp"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,12 +56,12 @@
         android:layout_width="328dp"
         android:layout_height="170dp"
         android:layout_marginTop="19dp"
-        android:text="I'LL DO BOTH!"
+        android:text="I'll do both!"
         android:textSize="16sp"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tutorButton"
-        app:strokeColor="#7900F7" />
+        app:strokeColor="@color/theme_purple_500" />
 </androidx.constraintlayout.widget.ConstraintLayout>

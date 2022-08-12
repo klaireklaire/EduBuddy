@@ -11,7 +11,7 @@ Clients (Students/ Parents): Want to update their profile data like changing nam
 **Postconditions**:
 Profiles are updated and saved. \
 **Main success scenario:**
-1. Users navigate to profile screen and hit the “edit profile” button
+1. Users navigate to profile screen and hit the “Edit Profile” button
 Users are allowed to change their profile information without verification except for passwords.
 2. User picture: optional section, allows user to change profile picture. “Choose a file” button will appear for user to input their picture in a suitable format.
 image file will be cropped to a square and resized down to 100x100 pixels.
@@ -28,4 +28,4 @@ User can hit “forgot password” button to get a link to “new password” sc
 *a At any time, system crashes \
 User restarts system \
 User contacts system support \
-System reconstructs prior state \
+System reconstructs prior state 

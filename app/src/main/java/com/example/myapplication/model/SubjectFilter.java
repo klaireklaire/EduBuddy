@@ -1,10 +1,11 @@
 package com.example.myapplication.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 
-public class SubjectFilter implements IFilter {
+public class SubjectFilter implements IFilter, Serializable {
 
     Subject teachingSubject;
 

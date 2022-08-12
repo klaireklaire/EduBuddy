@@ -2,17 +2,20 @@ package com.example.myapplication.model;
 
 import android.provider.ContactsContract;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.Serializable;
 import java.util.*;
 
-public class UserLibrary {
+public class UserLibrary implements Serializable {
 
     // fields
     HashSet<User> users;
+    HashSet<TutorUser> tutorUsers;
 //    private EmailEnter emailEnter;
 //
 //    public EmailEnter getEmailEnter() { return emailEnter; }
 //    public void setEmailEnter(EmailEnter emailEnter) { this.emailEnter = emailEnter; }
-
 
     // constructors
     public UserLibrary() {
@@ -33,6 +36,8 @@ public class UserLibrary {
 
         return this;
     }
+
+
 
 
     public HashSet<User> filterUsers(List<IFilter> fl) {
@@ -73,7 +78,6 @@ public class UserLibrary {
                "123456",
                "Khanh Le",
                2002,
-               Gender.FEMALE,
                true,
                12604,
                testLearning,
@@ -86,7 +90,6 @@ public class UserLibrary {
                "user1password",
                "Brooklynn Pierce",
                2003,
-               Gender.FEMALE,
                true,
                10101,
                testLearning1,
@@ -100,7 +103,6 @@ public class UserLibrary {
                "user2password",
                "Karli Cardenas",
                2002,
-               Gender.MALE,
                true,
                13453,
                testLearning2,
@@ -109,17 +111,17 @@ public class UserLibrary {
                4,
                Currency.USD);
 
-       User user3 = new TutorUser("user3@gmail.com", "user3password", "Camden Hardin", 2000, Gender.MALE,
+       User user3 = new TutorUser("user3@gmail.com", "user3password", "Camden Hardin", 2000,
                true, 15672, testLearning1, testTeaching,20.00,
                3,
                Currency.USD );
 
-       User user4 = new TutorUser("user4@gmail.com", "user4password", "Lee Blankenship", 2000, Gender.OTHER,
+       User user4 = new TutorUser("user4@gmail.com", "user4password", "Lee Blankenship", 2000,
                true, 16527, testLearning2, testTeaching, 25.00,
                7,
                Currency.USD);
 
-       User user5 = new TutorUser("user5@gmail.com", "user5password", "Hara Lee", 1999, Gender.FEMALE,
+       User user5 = new TutorUser("user5@gmail.com", "user5password", "Hara Lee", 1999,
                true, 16527, testLearning2, testTeaching, 15.00,
                4,
                Currency.USD);
@@ -149,6 +151,7 @@ public class UserLibrary {
     }
 
     public HashSet<User> getUsers() { return users; }
+    public HashSet<TutorUser> getTutorUsers() { return tutorUsers;}
 
     //public HashSet<TutorUser> getTutorUsers() { return users; }
 

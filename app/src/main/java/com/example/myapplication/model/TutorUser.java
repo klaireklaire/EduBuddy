@@ -2,9 +2,10 @@ package com.example.myapplication.model;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class TutorUser extends User{
+public class TutorUser extends User implements Serializable {
 
     // fields
     double ratePerHour;
@@ -13,6 +14,19 @@ public class TutorUser extends User{
 
     // fields not relevant to this iteration yet
     // List<String> testimonies;
+
+    // references strings for database access
+    private static final String EMAIL = "email";
+    private static final String PASSWORD = "password";
+    private static final String NAME = "name";
+    private static final String BIRTH_YEAR = "birthYear";
+    private static final String IS_REMOTE = "isRemote";
+    private static final String ZIP_CODE = "zipCode";
+    private static final String TEACHING_LIST = "teachingList";
+    private static final String LEARNING_LIST = "learningList";
+    private static final String RATE_PER_HOUR = "ratePerHour";
+    private static final String NUM_STUDENTS = "numStudents";
+    private static final String CURRENCY = "currency";
 
     /** Default constructor
      *
@@ -24,14 +38,13 @@ public class TutorUser extends User{
     /*
     Constructor for a TutorUser object
      */
-    public TutorUser(String email, String password, String name, int birthYear, Gender gender, boolean isRemote,
+    public TutorUser(String email, String password, String name, int birthYear, boolean isRemote,
                      int zipCode, Set<Subject> teachingList, Set<Subject> learningList, double ratePerHour, int numStudents,
                      Currency currency) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.birthYear = birthYear;
-        this.gender = gender;
         this.isRemote = isRemote;
         this.zipCode = zipCode;
         this.teachingList = teachingList;
@@ -50,7 +63,6 @@ public class TutorUser extends User{
         this.password = user.password;
         this.name = user.name;
         this.birthYear = user.birthYear;
-        this.gender = user.gender;
         this.isRemote = isRemote;
         this.zipCode = zipCode;
         this.teachingList = user.teachingList;
@@ -58,6 +70,35 @@ public class TutorUser extends User{
         this.ratePerHour = ratePerHour;
         this.numStudents = numStudents;
         this.currency = currency;
+    }
+
+    @Override
+    public Map<String,Object> toMap() {
+        Map<String,Object> map = super.toMap();
+        // fields related to tutor
+        map.put(RATE_PER_HOUR, ratePerHour);
+        map.put(NUM_STUDENTS, numStudents);
+        map.put(CURRENCY, currency);
+        return map;
+    }
+
+
+
+    public static TutorUser fromMap(@NonNull Map<String, Object> map) {
+        User u = User.fromMap(map);
+
+        boolean isRemote = (boolean) map.get(IS_REMOTE);
+        long zipCode = (long) map.get(ZIP_CODE);
+        int zipCodeInt = Math.toIntExact(zipCode);
+        double ratePerHour = (double) map.get(RATE_PER_HOUR);
+        long numStudentsLong = (long) map.get(NUM_STUDENTS);
+        int numStudents = Math.toIntExact(numStudentsLong);
+        String currencyString = (String) map.get(CURRENCY);
+        Currency currency = Currency.valueOf(currencyString.toUpperCase());
+
+
+        return new TutorUser(u, ratePerHour, numStudents, currency, zipCodeInt, isRemote);
+
     }
 
     /*
@@ -71,7 +112,6 @@ public class TutorUser extends User{
 
         result += "Name: " + this.name;
         result += "\nBirth year: " + this.birthYear;
-        result += "\nGender: " + this.gender;
 
         result += "\nRemote tutoring available: ";
         if (this.isRemote) {

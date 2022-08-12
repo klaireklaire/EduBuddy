@@ -1,6 +1,8 @@
 package com.example.myapplication.model;
 
-public enum SubjectLevel {
+import java.io.Serializable;
+
+public enum SubjectLevel implements Serializable {
     PRIMARY,
     MIDDLE_SCHOOL,
     HIGH_SCHOOL,

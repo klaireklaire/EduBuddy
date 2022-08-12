@@ -7,4 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="theme_background">#EBEEF0</color>
+    <color name="theme_purple_200">#8d7aa7</color>
+    <color name="theme_purple_500">#5F4E78</color>
+    <color name="theme_purple_700">#34264c</color>
+    <color name="theme_light_pink">#ebbab9</color>
+    <color name="theme_pink_200">#ff99c7</color>
+    <color name="theme_pink_500">#e36896</color>
+    <color name="theme_pink_700">#ae3768</color>
+    <color name="theme_yellow">#FFBB3A</color>
+    <color name="theme_blue">#97A8FE</color>
+    <color name="button_green">#5cb85c</color>
+    <color name="button_yellow">#f0ad4e</color>
+    <color name="button_red">#d9534f</color>
 </resources>
